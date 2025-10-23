@@ -25,18 +25,14 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ### ① Discordの準備
 
-1. [Discord Developer Portal](https://discord.com/developers/applications)
-     1. 「New Application」より新しいアプリケーションを作成します。
-     2. 「Bot」\>「Reset Token」より、トークンをコピーします。これは後でCloudflareの`DISCORD_TOKEN`として使用します。
-     3. 「Bot」\>「Reset Token」より、トークンをコピーします。これは後でCloudflareの`DISCORD_TOKEN`として使用します。
-     4. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
-     5. 「Generated URL」にアクセスし、サーバーにBotを招待します。
-3. 「Bot」\>「Reset Token」より、トークンをコピーします。これは後でCloudflareの`DISCORD_TOKEN`として使用します。
-4. 
-5. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot``applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages``Manage Message`を選択します。その後、「Generated URL」にアクセスし、サーバーにBotを招待します。
-6. DiscordサーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
-7. 
-8.  **エラー通知用Webhookの作成**: エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーしておきます。
+- [Discord Developer Portal](https://discord.com/developers/applications)
+    1. 「New Application」より新しいアプリケーションを作成します。
+    2. 「Bot」\>「Reset Token」より、トークンをコピーします。これは後でCloudflareの`DISCORD_TOKEN`として使用します。
+    3. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
+    4. 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
+- Discordサーバー
+    1. サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
+    2. エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーしておきます。
 
 ### 2\. Google Workspaceの準備
 
