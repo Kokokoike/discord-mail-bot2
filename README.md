@@ -25,12 +25,12 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ### ① Discordの準備
 
-  #### [Discord Developer Portal](https://discord.com/developers/applications)
+####   [Discord Developer Portal](https://discord.com/developers/applications)
 1. 「New Application」より新しいアプリケーションを作成します。
 2. 「Bot」\>「Reset Token」より、トークンをコピーします。(③.2の`DISCORD_TOKEN`)
 3. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
 4. 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
-  #### Discordサーバー
+####   Discordサーバー
 1. サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
 2. エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。(②.4の`DISCORD_WEBHOOK_URL`)
 
