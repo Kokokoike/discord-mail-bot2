@@ -25,12 +25,12 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ### ① Discordの準備
 
-####   [Discord Developer Portal](https://discord.com/developers/applications)
+#### [Discord Developer Portal](https://discord.com/developers/applications)
 1. 「New Application」より新しいアプリケーションを作成します。
 2. 「Bot」\>「Reset Token」より、トークンをコピーします。(③.2の`DISCORD_TOKEN`)
 3. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
 4. 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
-####   Discordサーバー
+#### Discordサーバー
 1. サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
 2. エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。(②.4の`DISCORD_WEBHOOK_URL`)
 
@@ -49,12 +49,14 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
       - C列： `ユーザーID`
 4.  「拡張機能」\>「Apps Script」より、新しいプロジェクトを作成します。
       - 「エディタ」\>「コード.gs」へ、`Gas.gs`を貼り付けます。
-      - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を設定します。
-          - `CLOUDFLARE_WORKER_URL`: (後で作成する**通知用Worker**のURL)
-          - `DISCORD_WEBHOOK_URL`: (上記で作成したエラー通知用WebhookのURL)
-          - `AUTH_SECRET`: (WorkerとGAS間で共有する秘密の認証キー、例: `openssl rand -hex 32`で生成)
-          - `TARGET_MAIL_ADDRESS`: (監視対象の共有メールアドレス)
-      - **トリガーの設定**: `checkMailAndNotify`関数を**1分ごと**に実行する時間ベースのトリガーを設定します。
+      - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を追加・設定します。
+          - `CLOUDFLARE_URL`: ④.2のURL
+          - `DISCORD_WEBHOOK_URL`: ①.Discordサーバー.2のURL
+          - `AUTH_SECRET`: WorkerとGAS間で共有する秘密の認証キー
+          - `MAIL_ADDRESS`: 対象のメールアドレス
+          - `LAST_ID`
+          - `LAST_TIMESTAMP`
+      - 「トリガー」\>「トリガーを追加」より、トリガーを設定します。
       - **デプロイ**: 「デプロイ」\>「新しいデプロイ」で、「ウェブアプリ」としてデプロイします。
           - **次のユーザーとして実行**: `自分`
           - **アクセスできるユーザー**: `全員`
