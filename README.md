@@ -13,21 +13,22 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ## 注意点
 
+  - 通知は10分おき
+  - Googleへメールアカウントを紐づけるとき、Googleがメールを取得するのが約1時間おき
+
 ## セットアップ
 
 ### 必要なもの
-  - Discord
+  - Discordサーバーとその管理権限
   - Googleアカウント
   - Cloudflare Workersアカウント
 
 ### 1\. Discordの準備
 
 1. [Discord Developer Portal](https://discord.com/developers/applications)で「New Application」より新しいアプリケーションを作成します。
-2. 「Bot」タブよりのトークンをコピーしておきます。これは後でWorkerの`DISCORD_TOKEN`として使用します。
-3.  **Botの招待**: 「OAuth2」\>「URL Generator」で、`bot`と`applications.commands`スコープを選択し、必要な権限（メッセージの送信、閲覧など）を付与して、サーバーにBotを招待します。
-4.  **各種IDの取得**:
-      - DiscordサーバーID (Guild ID)
-      - 通知を送信したいチャンネルID
+2. 「Bot」\>「Reset Token」より、トークンをコピーします。これは後でCloudflareの`DISCORD_TOKEN`として使用します。
+3. 「OAuth2」\>「URL Generator」で、「Scopes」\>「bot」「applications.commands」にチェックを入れた後、「Bot Permission」\>「Send Messages」「Manage Message」を選択します。その後、「Generated URL」にアクセスし、サーバーにBotを招待します。
+4. DiscordサーバーIDと通知を送信したいチャンネルIDを取得します。(「ユーザー設定」/>「詳細設定」/>「開発者モード」をオンにしてください。)
 6.  **エラー通知用Webhookの作成**: エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーしておきます。
 
 ### 2\. Google Workspaceの準備
@@ -94,12 +95,6 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
     ```
 
 これで全てのセットアップは完了です！
-
-## 使い方
-
-  - **メール通知**: 共有Gmailアドレスにメールが届くと、自動でチャンネルに通知が投稿されます。
-  - **対応完了**: メールへの対応が不要になったら、通知メッセージの「返信不要」ボタンを押します。Gmailから返信した場合も、ステータスは自動で更新されます。
-  - **リマインド**: チャンネルで`/reminder`と入力すると、未対応のメール一覧が表示されます。
 
 ## システム構成図
 
