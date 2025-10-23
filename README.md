@@ -25,12 +25,12 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ### ① Discordの準備
 
-#### [Discord Developer Portal](https://discord.com/developers/applications)
+  #### [Discord Developer Portal](https://discord.com/developers/applications)
 1. 「New Application」より新しいアプリケーションを作成します。
 2. 「Bot」\>「Reset Token」より、トークンをコピーします。(③.2の`DISCORD_TOKEN`)
 3. 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
 4. 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
-#### Discordサーバー
+  #### Discordサーバー
 1. サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
 2. エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。(②.4の`DISCORD_WEBHOOK_URL`)
 
@@ -48,8 +48,8 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
       - B列： `苗字`
       - C列： `ユーザーID`
 4.  「拡張機能」\>「Apps Script」より、新しいプロジェクトを作成します。
-      - 「エディタ」\>「コード.gs」へ、提供されたGASのコード (`code_gas2.txt`) を貼り付けます。
-      - **スクリプトプロパティ**に以下を設定します。
+      - 「エディタ」\>「コード.gs」へ、`Gas.gs`を貼り付けます。
+      - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を設定します。
           - `CLOUDFLARE_WORKER_URL`: (後で作成する**通知用Worker**のURL)
           - `DISCORD_WEBHOOK_URL`: (上記で作成したエラー通知用WebhookのURL)
           - `AUTH_SECRET`: (WorkerとGAS間で共有する秘密の認証キー、例: `openssl rand -hex 32`で生成)
