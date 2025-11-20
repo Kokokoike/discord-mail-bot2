@@ -21,7 +21,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 ### 必要なもの
   - Discordサーバーとその管理権限
   - Googleアカウント
-  - Cloudflare Workersアカウント([cloudflare.com](https://dash.cloudflare.com/sign-up?https%253A%252F%252Fdash.cloudflare.com%252F%253Faccount%253Dworkers)よりサインアップできます)
+  - Cloudflare Workersアカウント([こちら](https://dash.cloudflare.com/sign-up?https%253A%252F%252Fdash.cloudflare.com%252F%253Faccount%253Dworkers)よりGoogleアカウントなどを使ってサインアップできます)
 
 ### ① Discordの準備
 
@@ -68,7 +68,9 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ### 3\. Cloudflare Workersの準備
 
-2つのWorkerプロジェクトを作成します。
+1. [ダッシュボード](https://dash.cloudflare.com/)にアクセスします。
+2. 「アカウントホーム」\>「開発者プラットフォーム」\>「構築を開始する」をクリック。
+
 
 #### A. 通知用Worker
 
