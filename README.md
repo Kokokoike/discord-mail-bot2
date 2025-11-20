@@ -32,7 +32,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
     - 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
 2. Discordサーバー
     - サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
-    - エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。<a id="DISCORD_WEBHOOK_URL"></a>
+    - <a id="DISCORD_WEBHOOK_URL"></a> エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。
 
 ### ②使用するメールアドレスのGoogleアカウントへの紐づけ
 
