@@ -13,8 +13,8 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 ## 注意点
 
-  - 通知は10分おき
-  - Googleへメールアカウントを紐づけるとき、Googleがメールを取得するのが約1時間おき
+  - 通知は5~10分おきで行われ、メールの送受信にはリアルタイムで対応できません。
+  - Googleへメールアカウントを紐づけるとき、Googleがメールを取得するのが約1時間おきのため、さらに遅くなります。
 
 ## セットアップ
 
@@ -27,7 +27,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 
 1. [Discord Developer Portal](https://discord.com/developers/applications) にアクセスし、ログインします。
     - 「New Application」より新しいアプリケーションを作成します。
-    -「Bot」\>「Reset Token」より、トークンをコピーします。(③.2の`DISCORD_TOKEN`)
+    - 「Bot」\>「Reset Token」より、トークンをコピーします。(③.2の`DISCORD_TOKEN`)
     - 「OAuth2」\>「URL Generator」で、「Scopes」\>`bot` `applications.commands`にチェックを入れた後、「Bot Permission」\>`Send Messages` `Manage Message`を選択します。
     - 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
 2. Discordサーバー
