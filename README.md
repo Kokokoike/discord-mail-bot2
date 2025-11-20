@@ -32,7 +32,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
     - 「OAuth2」\>「Generated URL」にアクセスし、サーバーにBotを招待します。
 2. Discordサーバー
     - サーバーIDと通知を送信したいチャンネルIDを取得します。(「開発者モード」をオンにする必要があります)
-    - エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。(#DISCORD_WEBHOOK_URL)
+    - エラーログを投稿するチャンネルの「連携サービス」設定から、新しいWebhookを作成し、そのURLをコピーします。<a id="DISCORD_WEBHOOK_URL"></a>
 
 ### ②使用するメールアドレスのGoogleアカウントへの紐づけ
 
@@ -51,7 +51,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
       - 「エディタ」\>「コード.gs」へ、`Gas.gs`を貼り付けます。
       - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を追加・設定します。
           - `CLOUDFLARE_URL`:<a id=""></a>
-          - `DISCORD_WEBHOOK_URL`: <a id="DISCORD_WEBHOOK_URL"></a>
+          - [`DISCORD_WEBHOOK_URL`](#DISCORD_WEBHOOK_URL)
           - `AUTH_SECRET`: WorkerとGAS間で共有する秘密の認証キー
           - `MAIL_ADDRESS`: 対象のメールアドレス
           - `LAST_ID`
