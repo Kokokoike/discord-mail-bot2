@@ -51,7 +51,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
       - 「エディタ」\>「コード.gs」へ、`Gas.gs`を貼り付けます。
       - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を追加・設定します。
           - `CLOUDFLARE_URL`:<a id=""></a>
-          - `DISCORD_WEBHOOK_URL`:<a id="DISCORD_WEBHOOK_URL"></a>
+          - `DISCORD_WEBHOOK_URL`: <a id="DISCORD_WEBHOOK_URL"></a>
           - `AUTH_SECRET`: WorkerとGAS間で共有する秘密の認証キー
           - `MAIL_ADDRESS`: 対象のメールアドレス
           - `LAST_ID`
