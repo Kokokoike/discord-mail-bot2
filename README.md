@@ -21,7 +21,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
 ### 必要なもの
   - Discordサーバーとその管理権限
   - Googleアカウント
-  - Cloudflare Workersアカウント
+  - Cloudflare Workersアカウント([cloudflare.com](https://dash.cloudflare.com/sign-up?https%253A%252F%252Fdash.cloudflare.com%252F%253Faccount%253Dworkers)よりサインアップできます)
 
 ### ① Discordの準備
 
@@ -52,7 +52,7 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
       - 「プロジェクトの設定」\>「スクリプトプロパティ」に以下を追加・設定します。
           - `CLOUDFLARE_URL`:<a id=""></a>
           - [`DISCORD_WEBHOOK_URL`](#DISCORD_WEBHOOK_URL)
-          - `AUTH_SECRET`: WorkerとGAS間で共有する秘密の認証キー
+          - `AUTH_SECRET`: WorkerとGAS間で共有する秘密の認証キー(適当に決めてください)
           - `MAIL_ADDRESS`: 対象のメールアドレス
           - `LAST_ID`
           - `LAST_TIMESTAMP`
@@ -60,15 +60,15 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
           - 「実行する関数を選択」:`checkMailAndNotify`
           - 「イベントのソースを選択」:`時間主導型`
           - 「時間ベースのトリガーのタイプを選択」「時間の間隔を選択」:通知させたい間隔
-      - 「デプロイ」\>「新しいデプロイ」
+      - 「デプロイ」\>「新しいデプロイ」よりウェブアプリとしてURLを取得します。
           - 「種類の選択」:`ウェブアプリ`
-          - **次のユーザーとして実行**: `自分`
-          - **アクセスできるユーザー**: `全員`
-          - デプロイ後、ウェブアプリのURLをコピーしておきます。
+          - 次のユーザーとして実行: `自分`
+          - アクセスできるユーザー: `全員`
+          - デプロイし、ウェブアプリのURLをコピーしておきます。
 
 ### 3\. Cloudflare Workersの準備
 
-`wrangler` CLIを使用して、2つのWorkerプロジェクトを作成します。
+2つのWorkerプロジェクトを作成します。
 
 #### A. 通知用Worker
 
