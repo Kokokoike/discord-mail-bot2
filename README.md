@@ -144,7 +144,3 @@ Jizi渉外企業用のBotです。新着メールをDiscordへ通知します。
     1.  **通知用Worker**: GASからのトリガーを受けて、Discordに新着メール通知を投稿します。
     2.  **インタラクション用Worker**: Discordからのスラッシュコマンドやボタン操作を受け取り、セキュリティ検証を行った上でGAS Web Appに処理を依頼します。
   - **Discord**: ユーザーとのインターフェース。通知の表示と操作を行います。
-
-## ライセンス
-
-This project is licensed under the MIT License.
