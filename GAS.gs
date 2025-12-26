@@ -382,3 +382,119 @@ function getPendingList() {
   }
   return pendingList;
 }
+
+function checkMailAndNotify2() {
+  // キャッシュまたはスプレッドシートからデータを取得
+  const cache = CacheService.getScriptCache();
+  const cachedData = cache.get("cachedData");
+  let data;
+  if (cachedData) {
+    data = JSON.parse(cachedData);
+  } else {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet(); // もしくは `openByName(SPREADSHEET_NAME)`
+    const sheet = spreadsheet.getSheetByName(SHEET_NAME);
+    data = sheet.getDataRange().getValues();
+    cache.put("cachedData", JSON.stringify(data), 3600);
+  }
+
+  // 諸々の設定情報を取得
+  const properties = PropertiesService.getScriptProperties();
+  const config = {
+    mailAddress: properties.getProperty("MAIL_ADDRESS"),
+    lastId: properties.getProperty("LAST_ID") || '0',
+    lastTimestamp: properties.getProperty("LAST_TIMESTAMP") || null,
+    webhookUrl: properties.getProperty("DISCORD_WEBHOOK_URL"),
+  };
+
+  // 検索クエリ
+  let query = 'is:inbox';
+  if (config.lastTimestamp) {
+    // 前回実行のタイムスタンプの60秒前からを検索範囲
+    const searchTimestamp = Math.floor(parseInt(config.lastTimestamp) / 1000) - 60;
+    query += ` after:${searchTimestamp}`;
+  }
+
+  const threads = GmailApp.search(query);
+  let latestId = config.lastId;
+  let latestTimestamp = config.lastTimestamp;
+  for (let i = 0; i < threads.length; i++) {
+    const messages = threads[i].getMessages();
+
+    smallLoop : for (let j = messages.length - 1; j >= 0; j--) {
+      const message = messages[j];
+      const messageId = message.getId();
+
+      if (messageId > config.lastId) {
+        processNewMail(message, data, config);
+        if (messageId > latestId) {
+          latestId = messageId;
+          latestTimestamp = message.getDate();
+        }
+      } else {
+        break smallLoop; // 処理済みのメールに到達したらループを抜ける
+      }
+    }
+  }
+
+  // 最後に処理したIDを保存          
+  if (latestId > config.lastId) {
+    properties.setProperty("LAST_ID", latestId);
+    properties.setProperty("LAST_TIMESTAMP", latestTimestamp.getTime().toString());
+  } else {
+    Logger.log('No new emails found.');
+  }
+}
+
+function processNewMail(message, data, config) {
+  Logger.log(`Processing subject: ${message.getSubject()}`);
+
+  // 自分自身からのメールは除外
+  if (message.getFrom().includes(config.mailAddress)) return;
+  
+  // 自分宛でなければ除外
+  const recipients = message.getTo() + message.getCc() + message.getBcc();
+  if (!recipients.includes(config.mailAddress)) return;
+
+  // 通知本文
+  const body = message.getPlainBody().replace(/\s/g, '');
+  const mentionId = findMentionTarget(message, data, config.mailAddress, body);
+  const messageDate = message.getDate().toString().replace(/GMT.*/, '').trim();
+  let messageContent;
+  // 1. 本文のプレビューを先に取得する
+  const bodySnippet = getFirstFiveLines(body);
+  // 2. メッセージの基本部分を組み立てる
+  messageContent = (mentionId || 'メールが届きました:') + '\n' + '```' +
+                       '件名: ' + message.getSubject() + '\n' +
+                       '送信者: ' + message.getFrom() + '\n' +
+                       '受信日時: ' + messageDate + '\n' +
+                       '文頭:';
+
+  // 3. 本文プレビューがある場合のみ、改行とプレビュー内容を追加する
+  if (bodySnippet) {
+    messageContent += '\n' + bodySnippet;
+  }
+  messageContent += '```';
+
+  // 長いときを処理
+  if (messageContent.length > 300) {
+    messageContent = messageContent.substring(0, 300) + '...```';
+  }
+
+  messageContent += `[Gmailでメール全文を表示](${message.getThread().getPermalink()})`;
+
+  // 通知 flags:4でサムネイル表示オフ 
+  const payload = JSON.stringify({ 
+    content: messageContent,
+    flags: 4 
+  });
+
+  const options = {
+    method: 'POST',
+    contentType: 'application/json',
+    payload: payload
+  };
+
+  UrlFetchApp.fetch(config.webhookUrl, options);
+}
+
+
